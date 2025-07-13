@@ -1,4 +1,5 @@
 "use client";
+import { Fragment } from "react";
 import Link from "next/link";
 import tw from "tailwind-styled-components";
 export default function LastChapter() {
@@ -9,15 +10,15 @@ export default function LastChapter() {
     hover:underline
   `;
   const [prevChapterTitle, nextChapterTitle] = [
-    "3. Optimizing Fonts and Images",
-    "4. Creating Layouts and Pages",
+    "6. Setting Up Your Database",
+    "7. Fetching Data",
   ];
   const [prevChapterLink, nextChapterLink] = [
-    "optimizing-fonts-images",
-    "creating-layouts-and-pages",
+    "setting-up-your-database",
+    "fetching-data",
   ];
   const chapters = [
-    { title: `Prev Chapter ${prevChapterTitle}`, href: prevChapterLink },
+    { title: `Prev Chapter: ${prevChapterTitle}`, href: prevChapterLink },
     { title: `Next Chapter: ${nextChapterTitle}`, href: nextChapterLink },
   ];
   return (
@@ -25,14 +26,13 @@ export default function LastChapter() {
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">
           {chapters.map((chapter, index) => (
-            <>
+            <Fragment key={index}>
               <ChapterLink
-                key={index}
                 href={`https://nextjs.org/learn/dashboard-app/${chapter.href}`}
               >{chapter.title}
               </ChapterLink>
-              {index < chapters.length - 1 && <br key={`br${index}`} />}
-            </>
+              {index < chapters.length - 1 && <hr />}
+            </Fragment>
           ))}
         </h1>
       </div>
