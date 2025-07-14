@@ -10,12 +10,12 @@ export default function LastChapter() {
     hover:underline
   `;
   const [prevChapterTitle, nextChapterTitle] = [
-    "6. Setting Up Your Database",
     "7. Fetching Data",
+    "8. Static and Dynamic Rendering",
   ];
   const [prevChapterLink, nextChapterLink] = [
-    "setting-up-your-database",
     "fetching-data",
+    "static-and-dynamic-rendering",
   ];
   const chapters = [
     { title: `Prev Chapter: ${prevChapterTitle}`, href: prevChapterLink },
