@@ -3,8 +3,9 @@ import {
   ClockIcon,
   UserGroupIcon,
   InboxIcon,
-} from '@heroicons/react/24/outline';
-import { lusitana } from '@/app/ui/fonts';
+} from "@heroicons/react/24/outline";
+import { lusitana } from "@/app/ui/fonts";
+import { fetchCardData } from "@/app/lib/data";
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -13,19 +14,30 @@ const iconMap = {
   invoices: InboxIcon,
 };
 
+type CardProps = {
+  title: string;
+  value: number | string;
+  type: "invoices" | "customers" | "pending" | "collected";
+}
+
 export default async function CardWrapper() {
+  const {
+    numberOfCustomers,
+    numberOfInvoices,
+    totalPaidInvoices,
+    totalPendingInvoices,
+  } = await fetchCardData();
   return (
     <>
-      {/* NOTE: Uncomment this code in Chapter 9 */}
-
-      {/* <Card title="Collected" value={totalPaidInvoices} type="collected" />
-      <Card title="Pending" value={totalPendingInvoices} type="pending" />
-      <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
-      <Card
-        title="Total Customers"
-        value={numberOfCustomers}
-        type="customers"
-      /> */}
+      {Object.entries({
+        [totalPaidInvoices]: { 'collected': "Collected" },
+        [totalPendingInvoices]: { 'pending': "Pending" },
+        [numberOfCustomers]: { 'customers': "Total Customers" },
+        [numberOfInvoices]: { 'invoices': "Total Invoices" },
+      }).map(([value, data]) => {
+        const [type, title] = Object.entries(data)[0];
+        return <Card key={title} title={title} value={value} type={type as CardProps['type']} />;
+      })}
     </>
   );
 }
@@ -35,9 +47,9 @@ export function Card({
   value,
   type,
 }: {
-  title: string;
-  value: number | string;
-  type: 'invoices' | 'customers' | 'pending' | 'collected';
+  title: CardProps['title'];
+  value: CardProps['value'];
+  type: CardProps['type'];
 }) {
   const Icon = iconMap[type];
 
