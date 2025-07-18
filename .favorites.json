@@ -8,5 +8,14 @@
         "workspacePath": null,
         "id": "XIEstqgBaJ3d1HuM",
         "label": "last and next chapters"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\srgg6\\Documents\\Dev\\nextjs-dashboard\\app\\ui\\global.css",
+        "parent_id": null,
+        "fsPath": "c:\\Users\\srgg6\\Documents\\Dev\\nextjs-dashboard\\app\\ui\\global.css",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "51l4B3nqdoUr7EMF"
     }
 ]
