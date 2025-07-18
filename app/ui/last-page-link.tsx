@@ -9,11 +9,11 @@ export default (props: Props) => {
   console.log("pops.textColor", props.textColor);
   return (
     <div
-      className="absolute"
+      className="absolute hover:underline"
       style={{
         fontSize: "1.2rem",
-        right: `${props.textColor ? 54 : 62}px`,
-        top: "44px",
+        right: `${props.textColor ? 2 : 0.5}rem`,
+        top: `${props.textColor ? 44 : 0}px`,
       }}
     >
       {props.textColor && (
@@ -21,11 +21,11 @@ export default (props: Props) => {
           <Link href="/dashboard" className={textColor}>
             Dashboard
           </Link>
+          <br />
         </>
       )}
       {props.textColor !== "text-blue-600" && (
         <>
-          <br />
           <Link href="/last-chapter" className={textColor}>
             Last Chapter
           </Link>
