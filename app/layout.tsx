@@ -1,6 +1,6 @@
 import "@/app/ui/global.css";
 import { inter } from "@/app/ui/fonts";
-import Link from "next/link";
+import LastLink from "./ui/last-page-link";
 
 export default function RootLayout({
   children,
@@ -10,15 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <Link
-          href="/last-chapter"
-          className="absolute"
-          style={{
-            color: "#fff",
-            fontSize: "1.2rem",
-            right: "54px",
-            top: "44px",
-          }}>Last Chapter</Link>
+        <LastLink textColor="text-white" />
         {children}
       </body>
     </html>
