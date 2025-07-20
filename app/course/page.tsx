@@ -2,7 +2,7 @@ import Link from "next/link";
 import "./PPRQuiz.css";
 export default () => {
   return (
-    <main className="links-wrapper">
+    <>
     <h1>Choose Chapter to Check Your Knowledge!</h1>
     <hr />
     <br />
@@ -34,6 +34,6 @@ export default () => {
         );
       })}
       </section>
-    </main>
+    </>
   );
 };

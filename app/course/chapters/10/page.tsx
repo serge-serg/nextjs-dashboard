@@ -233,7 +233,7 @@ const PPRQuizPage: React.FC = () => {
   };
 
   return (
-    <main className="quiz-container">
+    <>
       <h1>🧪 Partial Prerendering Quiz</h1>
       <section id="quiz-section">
         {questions.map((q, qIndex) => (
@@ -283,7 +283,7 @@ const PPRQuizPage: React.FC = () => {
           Проверить ответы
         </button>
       )}
-    </main>
+    </>
   );
 };
 
