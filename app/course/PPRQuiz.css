@@ -79,7 +79,6 @@ main.links-wrapper a {
   color: #0070f3;
   font-size: 1.1rem;
   text-decoration: none;
-  padding: 0.25rem 0;
 }
 main.links-wrapper a:hover {
   text-decoration: underline;

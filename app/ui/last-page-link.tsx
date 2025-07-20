@@ -9,7 +9,7 @@ export default (props: Props) => {
   console.log("pops.textColor", props.textColor);
   return (
     <div
-      className="absolute hover:underline"
+      className="absolute hover-underline"
       style={{
         fontSize: "1.2rem",
         right: `${props.textColor ? 2 : 0.5}rem`,
@@ -32,6 +32,10 @@ export default (props: Props) => {
           {props.textColor ? <br /> : <span> | </span>}
           <Link href="/notes" className={textColor}>
             Notes
+          </Link>
+          {props.textColor ? <br /> : <span> | </span>}
+          <Link href="/course" className={textColor}>
+            Check Knowledge 
           </Link>
         </>
       )}

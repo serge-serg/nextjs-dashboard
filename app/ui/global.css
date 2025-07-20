@@ -44,3 +44,7 @@ ul {
 ul li {
   list-style: disc;
 }
+
+.hover-underline a:hover {
+  text-decoration: underline;
+}
