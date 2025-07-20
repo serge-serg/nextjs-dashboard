@@ -10,12 +10,12 @@ export default function LastChapter() {
     hover:underline
   `;
   const [prevChapterTitle, nextChapterTitle] = [
-    "10. Partial Prerendering",
     "11. Adding Search and Pagination",
+    "12. Mutating Data",
   ];
   const [prevChapterLink, nextChapterLink] = [
-    "partial-prerendering",
     "adding-search-and-pagination",
+    "mutating-data",
   ];
   const chapters = [
     { title: `Prev Chapter: ${prevChapterTitle}`, href: prevChapterLink },
