@@ -1,7 +1,7 @@
 #quiz-section {
   display: flex;
   flex-flow: wrap;
-  gap: 8;
+  gap: 2rem;
 }
 .quiz-container {
 }

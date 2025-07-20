@@ -222,19 +222,36 @@ const PPRQuizPage: React.FC = () => {
   );
   const [submitted, setSubmitted] = useState(false);
 
+  const correctCount = answers.reduce((count, answer, i) => {
+    return answer === questions[i].correctIndex ? count + 1 : count;
+  }, 0);
+
   const handleChange = (qIndex: number, optionIndex: number) => {
     const newAnswers = [...answers];
     newAnswers[qIndex] = optionIndex;
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
+  const handleSubmit = () => setSubmitted(true);
+  const handleReset = () => {
+    setAnswers(Array(questions.length).fill(null));
+    setSubmitted(false);
   };
+
+  const progressPercent = Math.round(
+    (answers.filter((a) => a !== null).length / questions.length) * 100
+  );
 
   return (
     <>
       <h1>🧪 Partial Prerendering Quiz</h1>
+
+      <div className="progress-bar-container">
+        <div className="progress-bar" style={{ width: `${progressPercent}%` }}>
+          {progressPercent}%
+        </div>
+      </div>
+
       <section id="quiz-section">
         {questions.map((q, qIndex) => (
           <div key={qIndex} className="question-block">
@@ -250,6 +267,7 @@ const PPRQuizPage: React.FC = () => {
               if (showResult) {
                 if (isSelected && isCorrect) className += " correct";
                 else if (isSelected && !isCorrect) className += " incorrect";
+                else if (!isSelected && isCorrect) className += " missed";
               }
 
               return (
@@ -278,10 +296,20 @@ const PPRQuizPage: React.FC = () => {
           </div>
         ))}
       </section>
-      {!submitted && (
+
+      {!submitted ? (
         <button className="submit-btn" onClick={handleSubmit}>
           Проверить ответы
         </button>
+      ) : (
+        <>
+          <p className="score mb-6">
+            🎯 Ваш результат: {correctCount} из {questions.length}
+          </p>
+          <button className="submit-btn" onClick={handleReset}>
+            Пройти снова
+          </button>
+        </>
       )}
     </>
   );
