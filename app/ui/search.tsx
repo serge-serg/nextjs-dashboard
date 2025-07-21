@@ -1,14 +1,16 @@
 "use client";
+import { useDebouncedCallback } from "use-debounce";
 import { MagnifyingGlassIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const param = "query";
   const pathname = usePathname();
   const { replace } = useRouter();
-  
-  function handleSearch(term: string) {
+
+  const handleSearch = useDebouncedCallback((term) => {
+    console.log(`Searching... ${term}`);
     const params = new URLSearchParams(searchParams);
     if (term) {
       params.set(param, term);
@@ -16,13 +18,13 @@ export default function Search({ placeholder }: { placeholder: string }) {
       params.delete(param);
     }
     replace(`${pathname}?${params.toString()}`);
-  }
+  }, 300);
 
   const removeSearchString = () => {
     const searchInput = document.getElementById("search") as HTMLInputElement;
-    searchInput.value = '';
+    searchInput.value = "";
     replace(pathname);
-  }
+  };
 
   return (
     <div className="relative flex flex-1 flex-shrink-0">
@@ -38,7 +40,10 @@ export default function Search({ placeholder }: { placeholder: string }) {
         }}
         defaultValue={searchParams.get(param)?.toString()}
       />
-      <TrashIcon onClick={removeSearchString} className="h-[20px] w-[20px] mt-2.5 ml-2 cursor-pointer" />
+      <TrashIcon
+        onClick={removeSearchString}
+        className="h-[20px] w-[20px] mt-2.5 ml-2 cursor-pointer"
+      />
       <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
     </div>
   );
