@@ -1,23 +1,29 @@
 "use client";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
-  const firstParam = searchParams.toString().split("=")[0]; // actually should be "query"
+  const param = "query";
   const pathname = usePathname();
   const { replace } = useRouter();
-  console.log({pathname, firstParam});
+  console.log({pathname, firstParam: param});
 
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
     if (term) {
-      params.set(firstParam, term);
+      params.set(param, term);
     } else {
-      params.delete(firstParam);
+      params.delete(param);
     }
     replace(`${pathname}?${params.toString()}`);
-    console.log({term, params: params.toString()});
+    console.log({term, params: params.toString(), replacePath: `${pathname}?${params.toString()}`});
+  }
+
+  const removeSearchString = () => {
+    const searchInput = document.getElementById("search") as HTMLInputElement;
+    searchInput.value = '';
+    replace(pathname);
   }
 
   return (
@@ -32,8 +38,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
         onChange={(e) => {
           handleSearch(e.target.value);
         }}
-        defaultValue={searchParams.get(firstParam)?.toString()}
+        defaultValue={searchParams.get(param)?.toString()}
       />
+      <TrashIcon onClick={removeSearchString} className="h-[20px] w-[20px] mt-2.5 ml-2 cursor-pointer" />
       <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
     </div>
   );
