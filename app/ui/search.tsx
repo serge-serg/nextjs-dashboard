@@ -7,8 +7,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const param = "query";
   const pathname = usePathname();
   const { replace } = useRouter();
-  console.log({pathname, firstParam: param});
-
+  
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
     if (term) {
@@ -17,7 +16,6 @@ export default function Search({ placeholder }: { placeholder: string }) {
       params.delete(param);
     }
     replace(`${pathname}?${params.toString()}`);
-    console.log({term, params: params.toString(), replacePath: `${pathname}?${params.toString()}`});
   }
 
   const removeSearchString = () => {
